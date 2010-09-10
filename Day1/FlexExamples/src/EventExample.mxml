@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   creationComplete="cc();">
+
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			protected function clickHandler(event:MouseEvent):void
+			{
+				trace(event.target, event.currentTarget, event.eventPhase);
+			}
+
+			protected function cc():void
+			{
+				outerGroup.addEventListener(MouseEvent.CLICK, clickHandler, true);
+				innerGroup.addEventListener(MouseEvent.CLICK, clickHandler, true);
+				myButton.addEventListener(MouseEvent.CLICK, clickHandler, true); // Doesn't do anything in this case.
+				outerGroup.addEventListener(MouseEvent.CLICK, clickHandler);
+				innerGroup.addEventListener(MouseEvent.CLICK, clickHandler);
+				myButton.addEventListener(MouseEvent.CLICK, clickHandler);
+			}
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Group id="outerGroup">
+		<s:Group id="innerGroup">
+			<s:Button id="myButton"/>
+		</s:Group>
+	</s:Group>
+</s:Application>
