@@ -1,0 +1,8 @@
+- Defined the most common terms surrounding Flex like ActionScript, ECMAScript MXML, AIR, halo, spark, Flex Builder, Flash Builder, Flash Player, etc.
+- Discussed many resources that can be used to assist in Flex development and learning.  
+- Looked at a really basic movie in the Flash IDE specifically checking out the frame-based timeline.  
+- Moved to Flash Builder and created both an ActionScript project and a Flex project.  We discussed how the projects have some important similarities (frames) and differences (mxml, sdk vs. language, etc).
+- Discussed ActionScript and MXML syntax and looked at a few really simple Flex examples.  
+- Saw how Flex components are built on ActionScript and how mxmlc converts MXML to ActionScript then ActionScript to a swf.
+- Checked out debugging in Flash Builder.
+- Took a really basic look at events.  
