@@ -1,11 +1,12 @@
 package
 {
 	import flash.display.Sprite;
+	import flash.events.EventPhase;
 	import flash.events.MouseEvent;
 	
-	public class EventExample extends Sprite
+	public class ASEventBubbling extends Sprite
 	{
-		public function EventExample()
+		public function ASEventBubbling()
 		{
 			super();
 			
@@ -37,12 +38,26 @@ package
 			blue.addEventListener(MouseEvent.CLICK, clickHandler, true);
 			green.addChild(blue);
 		}
-
+		
 		protected function clickHandler(event:MouseEvent):void
 		{
 			trace('Target: ' + Sprite(event.target).name, 
-					'Current target: ' + Sprite(event.currentTarget).name, 
-					'Phase: ' + event.eventPhase);
+				'Current target: ' + Sprite(event.currentTarget).name, 
+				'Phase: ' + getPhaseName(event.eventPhase));
+		}
+		
+		protected function getPhaseName(phase:uint):String
+		{
+			switch (phase)
+			{
+				case EventPhase.CAPTURING_PHASE:
+					return 'capturing';
+				case EventPhase.AT_TARGET:
+					return 'atTarget';
+				case EventPhase.BUBBLING_PHASE:
+					return 'bubbling';
+			}
+			return null;
 		}
 	}
 }

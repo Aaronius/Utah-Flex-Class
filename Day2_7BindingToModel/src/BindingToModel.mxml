@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   minWidth="955" minHeight="600" creationComplete="creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			protected var customer:Customer;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				customer = new Customer();
+				customer.name = 'John Doe';
+				customer.billingCurrent = true;
+			}
+			
+			protected function commitInfo(event:MouseEvent):void
+			{
+				customer.name = nameInput.text;
+				customer.billingCurrent = billingCurrentCheckbox.selected;
+			}
+			
+			protected function getBillingStatusText(billingCurrent:Boolean):String
+			{
+				return billingCurrent ? 'Current' : 'Delinquent';
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout paddingBottom="50" paddingLeft="50" 
+				paddingRight="50" paddingTop="50"
+				gap="20"/>
+	</s:layout>
+	
+	<s:Panel title="Customer Entry" width="350">
+		<s:layout>
+			<s:VerticalLayout gap="4"/>
+		</s:layout>
+		<mx:Form defaultButton="{commitButton}">
+			<mx:FormItem label="Name:">
+				<s:TextInput id="nameInput" text="{customer.name}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Billing Current:">
+				<s:CheckBox id="billingCurrentCheckbox" label="Billing Current"
+						selected="{customer.billingCurrent}"/>
+			</mx:FormItem>
+			<mx:FormItem>
+				<s:Button id="commitButton" label="Commit Info"
+			  			click="commitInfo(event)"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Panel>
+	
+	<s:Panel title="Customer Display" width="350">
+		<s:layout>
+			<s:VerticalLayout/>
+		</s:layout>
+		<mx:Form>
+			<mx:FormItem label="Name:">
+				<s:Label text="{customer.name}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Billing Status:">
+				<s:Label text="{getBillingStatusText(customer.billingCurrent)}"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Panel>
+</s:Application>

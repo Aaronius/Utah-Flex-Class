@@ -2,12 +2,15 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
-	<s:layout>
-		<s:VerticalLayout/>
-	</s:layout>
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout paddingBottom="50" paddingLeft="50" 
+						  paddingRight="50" paddingTop="50"/>
+	</s:layout>
 	
 	<s:Label text="{mySlider.value}"/>
 	<mx:Slider id="mySlider" liveDragging="true"/>

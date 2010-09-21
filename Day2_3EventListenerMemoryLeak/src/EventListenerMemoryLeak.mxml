@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" 
+			   xmlns:local="*"
+			   creationComplete="creationCompleteHandler(event)">
+
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+
+			protected var thermometer:Thermometer;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				// I could bind to thermometer.temperature, but we haven't learned about binding yet 
+				// and if we were in ActionScript we'd be given a scenario similar to this.
+				thermometer = new Thermometer();
+				tempDisplay.thermometer = thermometer;
+			}
+
+
+			protected function removeTemperatureDisplay(event:MouseEvent):void
+			{
+				// tempDisplay will remain in memory because this class references thermometer
+				// and thermometer references tempDisplay's strong event listener.
+				removeElement(tempDisplay);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<local:TemperatureDisplayLeaky id="tempDisplay"/>
+	<s:Button label="Remove Display" click="removeTemperatureDisplay(event)"/>
+</s:Application>

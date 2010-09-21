@@ -3,7 +3,7 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
 			   creationComplete="cc();">
-
+	
 	<fx:Script>
 		<![CDATA[
 			import mx.events.FlexEvent;
@@ -11,7 +11,7 @@
 			{
 				trace(event.target, event.currentTarget, event.eventPhase);
 			}
-
+			
 			protected function cc():void
 			{
 				outerGroup.addEventListener(MouseEvent.CLICK, clickHandler, true);
@@ -23,7 +23,7 @@
 			}
 		]]>
 	</fx:Script>
-
+	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>

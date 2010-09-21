@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	
+	<fx:Script>
+		<![CDATA[
+			private var _thermometer:Thermometer;
+			
+			public function get thermometer():Thermometer
+			{
+				return _thermometer;
+			}
+			
+			public function set thermometer(value:Thermometer):void
+			{
+				// Problem #1: The event listener isn't removed from the previous thermometer.
+				// This could cause unintended behavior because now this component is listening
+				// to multiple thermometers.
+				_thermometer = value;
+				
+				if (_thermometer)
+				{
+					// Problem #2: The event listener is not weak.  This component will stay
+					// in memory as long as thermometer does.
+					_thermometer.addEventListener(TemperatureEvent.TEMPERATURE_CHANGE, tempChangeHandler);
+				}
+			}
+
+			protected function tempChangeHandler(event:TemperatureEvent):void
+			{
+				temperatureLabel.text = String(thermometer.temperature);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:HorizontalLayout paddingBottom="15" paddingLeft="15"
+							paddingRight="15" paddingTop="15"/>
+	</s:layout>
+	
+	<s:Label text="Temperature:" fontWeight="bold"/>
+	<s:Label id="temperatureLabel"/>
+</s:Group>

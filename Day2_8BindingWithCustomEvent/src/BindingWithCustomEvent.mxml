@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   minWidth="955" minHeight="600" creationComplete="creationCompleteHandler(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			protected var customer:Customer;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				customer = new Customer();
+				customer.firstName = 'John';
+				customer.lastName = 'Doe';
+			}
+			
+			protected function commitInfo(event:MouseEvent):void
+			{
+				customer.firstName = firstNameInput.text;
+				customer.lastName = lastNameInput.text;
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout paddingBottom="50" paddingLeft="50" 
+						  paddingRight="50" paddingTop="50"
+						  gap="20"/>
+	</s:layout>
+	
+	<s:Panel title="Customer Entry" width="350">
+		<s:layout>
+			<s:VerticalLayout gap="4"/>
+		</s:layout>
+		<mx:Form defaultButton="{commitButton}">
+			<mx:FormItem label="First Name:">
+				<s:TextInput id="firstNameInput" text="{customer.firstName}"/>
+			</mx:FormItem>
+			<mx:FormItem label="Last Name:">
+				<s:TextInput id="lastNameInput" text="{customer.lastName}"/>
+			</mx:FormItem>
+			<mx:FormItem>
+				<s:Button id="commitButton" label="Commit Info"
+						  click="commitInfo(event)"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Panel>
+	
+	<s:Panel title="Customer Display" width="350">
+		<s:layout>
+			<s:VerticalLayout/>
+		</s:layout>
+		<mx:Form>
+			<mx:FormItem label="Full Name:">
+				<s:Label text="{customer.fullName}"/>
+			</mx:FormItem>
+		</mx:Form>
+	</s:Panel>
+</s:Application>
