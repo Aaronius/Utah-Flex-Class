@@ -1,0 +1,11 @@
+Discussed:
+- The basics of event dispatching and listening.
+- Both standard events and custom events.
+- Strong vs. weak listeners
+- Common memory leaks related to event listeners.
+- Event phases: capture, target, and bubble phases
+- Basic binding between components
+- Binding to a model.
+- Custom event bindable metadata tags.
+- High-level view of how binding internals work.
+- Packages and namespaces.
