@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   minWidth="955" minHeight="600"
+			   color="#464646"
+			   currentState="load"
+			   creationComplete="creationCompleteHandler(event)"
+			   viewSourceURL="srcview/index.html">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			/**
+			 * Shuffled row point values for each letter.
+			 */
+			protected const LETTER_VALUES:Object = {a:1, b:3, c:3, d:1, e:1, f:4, g:2, h:4, i:1, 
+				j:8, k:5, l:1, m:3, n:1, o:1, p:3, q:10, r:1, s:1, t:1, u:1, v:4, w:4, x:8, 
+				y:4, z:10};
+			
+			/**
+			 * Loader for loading the list of english words.
+			 */
+			protected var wordLoader:URLLoader;
+			
+			/**
+			 * An array of words in the english language.
+			 */
+			protected var words:Array;
+			
+			[Bindable]
+			/**
+			 * Possible solutions for available letters.
+			 */
+			protected var solutions:ArrayCollection;
+			
+			protected function creationCompleteHandler(event:FlexEvent):void
+			{
+				loadWords();
+			}
+			
+			/**
+			 * Loads the word dictionary.
+			 */
+			protected function loadWords():void
+			{
+				wordLoader = new URLLoader();
+				wordLoader.addEventListener(Event.COMPLETE, wordsLoadedHandler);
+				var request:URLRequest = new URLRequest('words.txt');
+				wordLoader.load(request);
+			}	
+			
+			/**
+			 * Handles the completion of the word dictionary loading.
+			 */
+			protected function wordsLoadedHandler(event:Event):void
+			{
+				wordLoader.removeEventListener(Event.COMPLETE, wordsLoadedHandler);
+				
+				// The dictionary has already been filtered to shuffled-row-eligible words
+				// (appropriate length, no apostrophes, etc.)
+				words = String(wordLoader.data).split(/\r\n|\r|\n/);
+				wordLoader = null;
+				currentState = 'play';
+			}
+			
+			/**
+			 * Given available letters, finds the best possible solutions.
+			 */
+			protected function solve(availableLetters:String):void
+			{
+				solutions ||= new ArrayCollection();
+				solutions.removeAll();
+				
+				for each (var word:String in words)
+				{
+					if (isCorrectWord(word, availableLetters))
+					{
+						var solution:Solution = new Solution();
+						solution.word = word;
+						solution.points = getWordPoints(word);
+						updateSolutions(solution, solutions);
+					}
+				}
+			}
+			
+			/**
+			 * Updates the solutions collection with a new solution depeding on its score
+			 * value.  This keeps the solutions ordered by point value and limited to three.
+			 */
+			protected function updateSolutions(solution:Solution, solutions:ArrayCollection):void
+			{
+				if (solutions.length == 0)
+				{
+					solutions.addItem(solution);
+				}
+				else
+				{
+					for (var i:uint = 0; i < solutions.length; i++)
+					{
+						var existingSolution:Solution = Solution(solutions.getItemAt(i));
+						if (solution.points > existingSolution.points)
+						{
+							solutions.addItemAt(solution, i);
+							
+							// Only keep three results.
+							while (solutions.length > 3)
+							{
+								solutions.removeItemAt(solutions.length - 1);
+							}
+							
+							return;
+						}
+					}
+				}	
+			}
+			
+			/**
+			 * Determines the points a word would fetch given Shuffled Row letter point and 
+			 * multiplier values.
+			 */
+			protected function getWordPoints(word:String):uint
+			{
+				var score:uint;
+				
+				var len:uint = word.length;
+				for (var i:uint; i < len; i++)
+				{
+					score += LETTER_VALUES[word.charAt(i)];
+				}
+				
+				var multiplier:uint = Math.max(1, word.length - 2);
+				score *= multiplier;
+				
+				return score;
+			}	
+			
+			/**
+			 * Determines whether a word can be considered a correct word given the available
+			 * letters.
+			 */
+			protected function isCorrectWord(word:String, availableLetters:String):Boolean
+			{
+				var len:uint = word.length;
+				for (var i:uint; i < len; i++)
+				{
+					var charIndex:int = availableLetters.indexOf(word.charAt(i));
+					if (charIndex > -1)
+					{
+						availableLetters = availableLetters.substring(0, charIndex) + 
+							availableLetters.substring(charIndex + 1, availableLetters.length);
+					}
+					else
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="load"/>
+		<s:State name="play"/>
+	</s:states>
+	
+	<s:layout>
+		<s:VerticalLayout gap="18" 
+						  paddingBottom="15" paddingLeft="15" paddingRight="15" paddingTop="15"/>
+	</s:layout>
+	
+	<s:Label text="Shuffled Row Solver" fontWeight="bold" fontSize="28"/>
+	<s:Label text="Loading dictionary..." fontSize="20" includeIn="load"/>
+	
+	<s:VGroup includeIn="play">
+		<s:Label text="Available Letters:" fontSize="20"/>
+		<mx:Form defaultButton="{solveButton}"
+				 paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0">
+			<s:HGroup>
+				<s:TextInput id="lettersInput" width="150" height="30" fontSize="17"/>
+				<s:Button id="solveButton" label="Solve" width="90" height="30" fontSize="17"
+						  click="solve(lettersInput.text)"/>
+			</s:HGroup>
+		</mx:Form>
+	</s:VGroup>
+	
+	<s:VGroup includeIn="play" visible="{solutions != null}">
+		<s:Label text="Top Words:" fontSize="20"/>
+		<s:DataGroup dataProvider="{solutions}">
+			<s:layout>
+				<s:VerticalLayout/>
+			</s:layout>
+			<s:itemRenderer>
+				<fx:Component>
+					<s:ItemRenderer autoDrawBackground="false">
+						<s:Label text="{Solution(data).word + ' (' + Solution(data).points + ' pts.)'}" 
+								 fontSize="17" />
+					</s:ItemRenderer>
+				</fx:Component>
+			</s:itemRenderer>
+		</s:DataGroup>
+	</s:VGroup>
+	
+	<s:Label includeIn="play" visible="{solutions != null}"
+			 text="The Kindle may not recognize all top words.  Choose wisely."
+			 fontSize="10"/>
+</s:Application>
