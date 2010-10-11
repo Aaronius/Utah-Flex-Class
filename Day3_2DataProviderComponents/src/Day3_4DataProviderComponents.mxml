@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   creationComplete="creationCompleteHandler();"
+			   minWidth="955" minHeight="600">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			
+			[Bindable]
+			protected var usStatesLong:ArrayCollection;
+			
+			[Bindable]
+			protected var usStatesShort:ArrayCollection;
+			
+			protected function creationCompleteHandler():void
+			{
+				usStatesLong = new ArrayCollection([
+						'Montana', 
+						'Rhode Island',
+						'South Carolina',
+						'Iowa',
+						'New Mexico',
+						'Arkansas',
+						'Colorado',
+						'Maine',
+						'Ohio',
+						'Wisconsin',
+						'Maryland',
+						'Idaho',
+						'Hawaii',
+						'Alabama',
+						'Illinois',
+						'New Hampshire',
+						'New Jersey',
+						'West Virginia',
+						'Pennsylvania']);
+				
+				usStatesShort = new ArrayCollection([
+						'Montana', 
+						'Rhode Island',
+						'South Carolina',
+						'Iowa']);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<!-- Notice List already supports scrolling -->
+	<s:List width="200" height="100" dataProvider="{usStatesLong}"/>
+	<s:ButtonBar dataProvider="{usStatesShort}"/>
+	<mx:TabBar dataProvider="{usStatesShort}"/>
+	<s:DropDownList width="150" dataProvider="{usStatesLong}"/>
+	<s:ComboBox width="150" dataProvider="{usStatesLong}"/>
+	<!-- DataGroup and DataGrid examples in another project -->
+</s:Application>

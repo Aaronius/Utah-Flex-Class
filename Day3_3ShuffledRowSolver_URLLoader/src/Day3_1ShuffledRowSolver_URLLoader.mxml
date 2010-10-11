@@ -48,6 +48,14 @@
 				wordLoader = new URLLoader();
 				wordLoader.addEventListener(Event.COMPLETE, wordsLoadedHandler);
 				var request:URLRequest = new URLRequest('words.txt');
+				
+//				You could make a POST request with variables like so:
+//				request.method = URLRequestMethod.POST;
+//				var postVars:URLVariables = new URLVariables();
+//				postVars.username = 'John';
+//				postVars.password = 'h4x0r3d';
+//				request.data = postVars;
+				
 				wordLoader.load(request);
 			}	
 			
