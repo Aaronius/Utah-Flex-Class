@@ -41,7 +41,7 @@
 			
 			protected function button1_clickHandler(event:MouseEvent):void
 			{
-				catalog.product[0].@productId = 9999;
+				catalog.product[0].@productId = 1234;
 			}
 			
 		]]>
@@ -50,7 +50,7 @@
 		<s:VerticalLayout/>
 	</s:layout>
 	
-	<s:Button label="Change Value" click="button1_clickHandler(event)"/>
+	<s:Button label="Change First Product ID" click="button1_clickHandler(event)"/>
 	
 	<mx:DataGrid dataProvider="{catalog.product}" width="100%" height="100%">
 		<mx:columns>
