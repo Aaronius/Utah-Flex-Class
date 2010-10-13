@@ -16,14 +16,14 @@
       <item name="ServiceBackendType">PHP</item>
     </annotation>
     <annotation name="ServiceConfig">
-      <item name="PHP_RELATIVE_LOCATION">Day3_3EmployeeBrowser-debug/services/EmployeesService.php</item>
+      <item name="PHP_RELATIVE_LOCATION">Day3_8EmployeeDirectory-debug/services/EmployeesService.php</item>
       <item name="PHP_SERVER_ROOT">C:/xampplite/htdocs</item>
       <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
-      <item name="PHP_SERVICES_FOLDER">C:/xampplite/htdocs/Day3_3EmployeeBrowser-debug/services</item>
-      <item name="PHP_LOCATION">C:/xampplite/htdocs/Day3_3EmployeeBrowser-debug/services/EmployeesService.php</item>
+      <item name="PHP_SERVICES_FOLDER">C:/xampplite/htdocs/Day3_8EmployeeDirectory-debug/services</item>
+      <item name="PHP_LOCATION">C:/xampplite/htdocs/Day3_8EmployeeDirectory-debug/services/EmployeesService.php</item>
       <item name="LINKED_FILE">EmployeesService.php</item>
       <item name="PHP_SERVER_ROOT_URL">http://localhost/</item>
-      <item name="ABSOLUTE_ENDPOINT">http://localhost/Day3_3EmployeeBrowser-debug/gateway.php</item>
+      <item name="ABSOLUTE_ENDPOINT">http://localhost/Day3_8EmployeeDirectory-debug/gateway.php</item>
       <item name="PHP_CLASS_NAME">EmployeesService</item>
     </annotation>
     <function name="getAllEmployees" return-type="Employees[]">
