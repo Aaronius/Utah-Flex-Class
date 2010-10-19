@@ -1,0 +1,7 @@
+Discussed:
+- IList collections (ArrayCollection, ArrayList, XMLListCollection) and their difference from more simple collections like arrays.
+- DataProvider components
+- Item renderers
+- Virtualization/renderer recycling
+- Filtering and sorting a collection view.
+- Scrollers
