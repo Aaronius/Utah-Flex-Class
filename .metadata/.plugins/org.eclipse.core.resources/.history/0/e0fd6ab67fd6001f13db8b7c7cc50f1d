@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:employeesservice="services.employeesservice.*" xmlns:valueObjects="valueObjects.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function list_creationCompleteHandler(event:FlexEvent):void
+			{
+				getAllEmployeesResult.token = employeesService.getAllEmployees();
+			}
+			
+			
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				employees.birth_date = birth_dateDateField.selectedDate;
+				employees.first_name = first_nameTextInput.text;
+				employees.last_name = last_nameTextInput.text;
+				employees.gender = genderTextInput.text;
+				employees.hire_date = hire_dateDateField.selectedDate;
+				employees.phone_no = phone_noTextInput.text;
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:CallResponder id="getAllEmployeesResult"/>
+		<employeesservice:EmployeesService id="employeesService" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<valueObjects:Employees id="employees"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:List x="19" y="27" width="214" height="232" id="list" creationComplete="list_creationCompleteHandler(event)" labelField="first_name">
+		<s:AsyncListView list="{getAllEmployeesResult.lastResult}"/>
+	</s:List>
+	<mx:Form defaultButton="{button}" x="258" y="27">
+		<mx:FormItem label="Birth_date">
+			<mx:DateField id="birth_dateDateField" selectedDate="{employees.birth_date}"/>
+		</mx:FormItem>
+		<mx:FormItem label="First_name">
+			<s:TextInput id="first_nameTextInput" text="{employees.first_name}"/>
+		</mx:FormItem>
+		<mx:FormItem label="Last_name">
+			<s:TextInput id="last_nameTextInput" text="{employees.last_name}"/>
+		</mx:FormItem>
+		<mx:FormItem label="Gender">
+			<s:TextInput id="genderTextInput" text="{employees.gender}"/>
+		</mx:FormItem>
+		<mx:FormItem label="Hire_date">
+			<mx:DateField id="hire_dateDateField" selectedDate="{employees.hire_date}"/>
+		</mx:FormItem>
+		<mx:FormItem label="Phone_no">
+			<s:TextInput id="phone_noTextInput" text="{employees.phone_no}"/>
+		</mx:FormItem>
+		<s:Button id="button" label="Submit" click="button_clickHandler(event)"/>
+	</mx:Form>
+</s:Application>

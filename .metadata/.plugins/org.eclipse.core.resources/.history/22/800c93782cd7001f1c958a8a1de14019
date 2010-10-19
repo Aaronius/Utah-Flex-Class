@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   creationComplete="creationCompleteHandler();"
+			   minWidth="955" minHeight="600">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.collections.Sort;
+			import mx.collections.SortField;
+			
+			[Bindable]
+			protected var usStates:ArrayCollection;
+			
+			protected function creationCompleteHandler():void
+			{
+				usStates = new ArrayCollection([
+					new USState('Montana', 'MT'),
+					new USState('Rhode Island', 'RI'),
+					new USState('South Carolina', 'SC'),
+					new USState('Iowa', 'IA'),
+					new USState('New Mexico', 'NM'),
+					new USState('Arkansas', 'AR'),
+					new USState('Colorado', 'CO'),
+					new USState('Maine', 'ME'),
+					new USState('Ohio', 'OH'),
+					new USState('Wisconsin', 'WI'),
+					new USState('Maryland', 'MD'),
+					new USState('Idaho', 'ID'),
+					new USState('Hawaii', 'HI'),
+					new USState('Alabama', 'AL'),
+					new USState('Illinois', 'IL'),
+					new USState('New Hampshire', 'NH'),
+					new USState('New Jersey', 'NJ'),
+					new USState('West Virginia', 'WV'),
+					new USState('Pennsylvania', 'PA')]);
+			}
+			
+			protected function filter(text:String):void
+			{
+				var nameFilter:Function = function(obj:Object):Boolean
+				{
+					return USState(obj).name.toLowerCase().indexOf(text.toLowerCase()) > -1;
+				}
+					
+				usStates.filterFunction = nameFilter;
+				usStates.refresh();
+			}
+			
+			protected function sort(enabled:Boolean):void
+			{
+				if (enabled)
+				{
+					var sortField:SortField = new SortField();
+					sortField.name = "name";
+					var sort:Sort = new Sort();
+					sort.fields = [sortField];
+					usStates.sort = sort;
+				}
+				else
+				{
+					usStates.sort = null;
+				}
+				usStates.refresh();
+			}
+			
+			protected function generateLabel(usState:Object):String
+			{
+				return USState(usState).name + ' (' + USState(usState).abbreviation + ')';
+			}
+			
+			protected function modifyName(usState:USState, name:String):void
+			{
+				usState.name = name;
+				trace(usState.name);
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<s:HGroup verticalAlign="middle">
+		<s:Label text="Filter:"/>
+		<s:TextInput id="filterInput" change="filter(filterInput.text);"/>
+	</s:HGroup>
+	
+	<s:HGroup>
+		<s:CheckBox id="sortCheckbox" label="Sort" click="sort(sortCheckbox.selected);"/> 
+	</s:HGroup>
+	
+	<s:List id="stateList" width="250" height="250" dataProvider="{usStates}" 
+			labelFunction="{generateLabel}"/>
+	
+	<s:HGroup verticalAlign="middle">
+		<s:Label text="Modify Selected Item:"/>
+		<s:TextInput id="nameInput" text="{stateList.selectedItem.name}"
+				change="modifyName(stateList.selectedItem, nameInput.text);"/>
+	</s:HGroup>
+</s:Application>

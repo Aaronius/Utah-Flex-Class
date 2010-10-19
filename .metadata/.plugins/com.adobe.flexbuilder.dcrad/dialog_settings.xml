@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="Day3_4TwitterSearch|TwitterSearch|search">
+		<item value="" key="CompleteUrl"/>
+		<item value="true" key="SaveInput"/>
+		<item value="" key="SampleResponse"/>
+		<item value="ENTER_ARGUMENT_VALUES" key="SelectedOptionHttpGet"/>
+		<list key="ArgumentsArray">
+			<item value="adobe"/>
+			<item value="adobe"/>
+			<item value=""/>
+		</list>
+	</section>
+	<section name="ZdrojakFlexPHP|EmployeesService|getAllEmployees">
+		<item value="true" key="SaveInput"/>
+		<list key="ArgumentsArray">
+		</list>
+	</section>
+</section>

@@ -1,0 +1,13 @@
+package
+{
+	import flash.display.Sprite;
+	
+	[Bindable]
+	public class BindTest extends Sprite
+	{
+		public function BindTest()
+		{
+			
+		}
+	}
+}

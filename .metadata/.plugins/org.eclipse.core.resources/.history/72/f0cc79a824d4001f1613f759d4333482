@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:employeesservice="services.employeesservice.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				getAllEmployeesResult.token = employeesService.getAllEmployees();
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:CallResponder id="getAllEmployeesResult"/>
+		<employeesservice:EmployeesService id="employeesService" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Button x="20" y="23" label="Button" id="button" click="button_clickHandler(event)"/>
+	<s:List x="20" y="52" width="206" height="199" id="list" labelField="first_name">
+		<s:AsyncListView list="{getAllEmployeesResult.lastResult}"/>
+	</s:List>
+</s:Application>

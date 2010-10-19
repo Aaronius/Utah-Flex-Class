@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	<!-- Notice the use of a scroller for scrolling ability -->
+		<s:DataGroup height="150" itemRenderer="spark.skins.spark.DefaultItemRenderer">
+			<s:layout>
+				<s:VerticalLayout/>
+			</s:layout>
+			<s:dataProvider>
+				<s:ArrayList>
+					<fx:String>Montana</fx:String>
+					<fx:String>Rhode Island</fx:String>
+					<fx:String>South Carolina</fx:String>
+					<fx:String>Iowa</fx:String>
+					<fx:String>New Mexico</fx:String>
+					<fx:String>Arkansas</fx:String>
+					<fx:String>Colorado</fx:String>
+					<fx:String>Maine</fx:String>
+					<fx:String>Ohio</fx:String>
+					<fx:String>Wisconsin</fx:String>
+					<fx:String>Maryland</fx:String>
+					<fx:String>Idaho</fx:String>
+					<fx:String>Hawaii</fx:String>
+					<fx:String>Alabama</fx:String>
+					<fx:String>Illinois</fx:String>
+					<fx:String>New Hampshire</fx:String>
+					<fx:String>New Jersey</fx:String>
+					<fx:String>West Virginia</fx:String>
+					<fx:String>Pennsylvania</fx:String>
+				</s:ArrayList>
+			</s:dataProvider>
+		</s:DataGroup>
+</s:Application>

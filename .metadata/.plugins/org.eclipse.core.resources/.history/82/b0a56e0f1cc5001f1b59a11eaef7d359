@@ -1,0 +1,14 @@
+package
+{
+	import flash.display.Sprite;
+	
+	public class BindTest extends Sprite
+	{
+		public function BindTest()
+		{
+			
+		}
+		[Bindable]
+		public var woot:String;
+	}
+}

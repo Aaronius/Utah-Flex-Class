@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model xmlns="http://ns.adobe.com/Fiber/1.0">
+  <annotation name="ActionScriptGeneration">
+    <item name="FullyQualifyReferences">true</item>
+  </annotation>
+  <service name="EmployeesService">
+    <annotation name="ActionScriptGeneration">
+      <item name="Source">EmployeesService</item>
+      <item name="ServiceType">RemoteObject</item>
+      <item name="Package">services.employeesservice</item>
+      <item name="Endpoint">gateway.php</item>
+      <item name="Destination">EmployeesService</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">PHP</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="PHP_RELATIVE_LOCATION">Day3_3EmployeeBrowser-debug/services/EmployeesService.php</item>
+      <item name="PHP_SERVER_ROOT">C:\xampplite\htdocs</item>
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="PHP_SERVICES_FOLDER">C:\xampplite\htdocs\Day3_8EmployeeBrowser-debug\services</item>
+      <item name="PHP_LOCATION">C:/xampplite/htdocs/Day3_3EmployeeBrowser-debug/services/EmployeesService.php</item>
+      <item name="LINKED_FILE">EmployeesService.php</item>
+      <item name="PHP_SERVER_ROOT_URL">http://localhost/</item>
+      <item name="ABSOLUTE_ENDPOINT">http://localhost/Day3_8EmployeeBrowser-debug/gateway.php</item>
+      <item name="PHP_CLASS_NAME">EmployeesService</item>
+    </annotation>
+    <function name="getAllEmployees" return-type="Employees[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getEmployeesByID" arguments="itemID:integer" return-type="Employees">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="createEmployees" arguments="item:Employees" return-type="integer">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="updateEmployees" arguments="item:Employees" return-type="void">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="deleteEmployees" arguments="itemID:integer" return-type="void">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="count" return-type="integer">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+    <function name="getEmployees_paged" arguments="startIndex:integer,numItems:integer" return-type="Employees[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">opaque,opaque</item>
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+  </service>
+  <entity name="Employees" persistent="true">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">Employees</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">EmployeesService</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="DataManagement">
+      <item name="create">createEmployees</item>
+      <item name="update">updateEmployees</item>
+      <item name="get">getEmployeesByID</item>
+      <item name="delete">deleteEmployees</item>
+      <item name="fillFunc">getAllEmployees,getEmployees_paged</item>
+      <item name="managingService">EmployeesService</item>
+    </annotation>
+    <annotation name="getEmployeesByID">
+      <item name="propertySpecifier">emp_no,birth_date,first_name,last_name,gender,hire_date,phone_no,email_address,job_title</item>
+    </annotation>
+    <annotation name="getAllEmployees">
+      <item name="propertySpecifier">emp_no,birth_date,first_name,last_name,gender,hire_date,phone_no,email_address,job_title</item>
+    </annotation>
+    <annotation name="getEmployees_paged">
+      <item name="propertySpecifier">emp_no,birth_date,first_name,last_name,gender,hire_date,phone_no,email_address,job_title</item>
+      <item name="pagingEnabled">true</item>
+      <item name="positionalPagingParameters">true</item>
+      <item name="countOperation">count</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <id name="emp_no" type="integer"/>
+    <property name="birth_date" type="date" required="true"/>
+    <property name="first_name" type="string" required="true"/>
+    <property name="last_name" type="string" required="true"/>
+    <property name="gender" type="string" required="true"/>
+    <property name="hire_date" type="date" required="true"/>
+    <property name="phone_no" type="string" required="true"/>
+    <property name="email_address" type="string" required="true"/>
+    <property name="job_title" type="string" required="true"/>
+  </entity>
+</model>
