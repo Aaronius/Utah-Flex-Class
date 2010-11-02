@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import mx.printing.FlexPrintJob;
+			import mx.printing.FlexPrintJobScaleType;
+			
+			import spark.components.Label;
+			import spark.components.VGroup;
+			protected var file:File;
+			
+			protected function go():void
+			{
+				file = new File();
+				file.resolvePath('C:\\Users\\aaronh\\Desktop\\Organization.csv');
+				load(file);
+			}
+			
+			protected function browseForFile():void
+			{
+				file = new File();
+				file.addEventListener(Event.SELECT, fileSelected);
+				file.browseForOpen('Browse for Leadership Data', [new FileFilter('CSV (*.csv)', '*.csv')]);
+			}
+			
+			protected function fileSelected(event:Event):void
+			{
+				trace('file selected');
+				load(file);
+			}
+			
+			protected function load(file:File):void
+			{
+				trace('load');
+				file.addEventListener(Event.COMPLETE, fileLoaded);
+				file.load();
+			}
+			
+			protected function fileLoaded(event:Event):void
+			{
+				var bytes:ByteArray = file.data;
+				var data:String = bytes.readUTFBytes(bytes.length);
+				var lines:Array = data.split(/\r\n|\r|\n/);
+				
+				var rows:Array = [];
+				for (var i:uint = 1; i < lines.length; i++)
+				{
+					var line:String = lines[i];
+					rows.push(CSVParser.parseCSV(line));
+				}
+				
+				var organizations:Array = Grouper.group(rows);
+				for each (var organization:Organization in organizations)
+				{
+					var organizationGroup:VGroup = new VGroup();
+					var label:Label = new Label();
+					label.text = organization.name;
+					organizationGroup.addElement(label);
+					report.addElement(organizationGroup);
+					for each (var position:Position in organization.positions)
+					{
+						label = new Label();
+						label.text = position.name + ' - ' + position.leader;
+						organizationGroup.addElement(label);
+					}
+				}
+			}
+			
+			protected function print():void
+			{
+				// Create an instance of the FlexPrintJob class.
+				var printJob:FlexPrintJob = new FlexPrintJob();
+				
+				// Start the print job.
+				if (printJob.start() != true) return;
+				
+				printJob.printAsBitmap = false;
+				
+				// Add the object to print. Do not scale it.
+				printJob.addObject(report, FlexPrintJobScaleType.SHOW_ALL);
+				
+				// Send the job to the printer.
+				printJob.send();
+			}
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<s:HGroup verticalAlign="middle">
+		<s:Button label="Load" click="go();"/>
+		<s:Button label="Load Organization File" click="browseForFile();"/>
+		<s:Button label="Print" click="print()"/>
+	</s:HGroup>
+	
+	<s:HGroup id="report"/>
+</s:WindowedApplication>

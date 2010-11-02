@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	<fx:Script>
+		<![CDATA[
+			import com.aaronhardy.Person;
+			protected function findKite():void {
+				var owner:Person = new Person();
+				owner.firstName = firstName.text;
+				owner.lastName = lastName.text;
+				
+				var command:FindKiteCommand = new FindKiteCommand();
+				command.execute(owner);
+			}
+		]]>
+	</fx:Script>
+	<mx:Form defaultButton="{findKiteButton}">
+		<mx:FormHeading label="Kite Finder"/>
+		<mx:FormItem label="Pilot's First Name:">
+			<s:TextInput id="firstName"/>
+		</mx:FormItem>
+		<mx:FormItem label="Pilot's Last Name:">
+			<s:TextInput id="lastName"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<s:Button id="findKiteButton" label="Find Kite" click="findKite();"/>
+		</mx:FormItem>
+	</mx:Form>
+</s:Application>
