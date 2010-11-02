@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:twittersearch="services.twittersearch.*" xmlns:valueObjects="valueObjects.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				searchResult.token = twitterSearch.search(qTextInput.text);
+			}
+			
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				twitterResults.query = queryTextInput.text;
+				twitterResults.completed_in = parseFloat(completed_inTextInput.text);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<twittersearch:TwitterSearch id="twitterSearch" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<s:CallResponder id="searchResult" result="twitterResults = searchResult.lastResult as TwitterResults"/>
+		<valueObjects:TwitterResults id="twitterResults"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:Form defaultButton="{button}">
+		<mx:FormItem label="Q">
+			<s:TextInput id="qTextInput"/>
+		</mx:FormItem>
+		<s:Button label="Search" id="button" click="button_clickHandler(event)"/>
+	</mx:Form>
+	<mx:Form defaultButton="{button2}" x="0" y="89">
+		<mx:FormHeading label="TwitterResults"/>
+		<mx:FormItem label="Query">
+			<s:TextInput id="queryTextInput" text="{twitterResults.query}"/>
+		</mx:FormItem>
+		<mx:FormItem label="Completed_in">
+			<s:TextInput id="completed_inTextInput" text="{twitterResults.completed_in}"/>
+		</mx:FormItem>
+		<s:Button id="button2" label="Submit" click="button2_clickHandler(event)"/>
+	</mx:Form>
+</s:Application>

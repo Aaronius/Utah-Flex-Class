@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:employeesservice="services.employeesservice.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function dataGrid_creationCompleteHandler(event:FlexEvent):void
+			{
+				getAllEmployeesResult.token = employeesService.getAllEmployees();
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<s:CallResponder id="getAllEmployeesResult"/>
+		<employeesservice:EmployeesService id="employeesService" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:DataGrid x="18" y="21" id="dataGrid" creationComplete="dataGrid_creationCompleteHandler(event)" dataProvider="{getAllEmployeesResult.lastResult}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="emp_no" dataField="emp_no"/>
+			<mx:DataGridColumn headerText="birth_date" dataField="birth_date"/>
+			<mx:DataGridColumn headerText="first_name" dataField="first_name"/>
+			<mx:DataGridColumn headerText="last_name" dataField="last_name"/>
+			<mx:DataGridColumn headerText="gender" dataField="gender"/>
+			<mx:DataGridColumn headerText="hire_date" dataField="hire_date"/>
+			<mx:DataGridColumn headerText="phone_no" dataField="phone_no"/>
+			<mx:DataGridColumn headerText="email_address" dataField="email_address"/>
+			<mx:DataGridColumn headerText="job_title" dataField="job_title"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Application>

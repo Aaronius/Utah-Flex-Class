@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   creationComplete="cc();" 
+			   minWidth="955" minHeight="600">
+	<fx:Script>
+		<![CDATA[
+			protected var loader:URLLoader;
+			
+			[Bindable]
+			protected var catalog:XML;
+			
+			protected function cc():void
+			{
+				loader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, completeHandler);
+				loader.load(new URLRequest('catalog.xml'));
+			}
+			
+			protected function completeHandler(event:Event):void
+			{
+				// Creating an XML object from an XML string.
+				catalog = new XML(loader.data);
+				
+				// Demo of XML, XMLList, loopage, attributes and nodes, toString() vs toXMLString()
+				var products:XMLList = catalog.product;
+				for each (var product:XML in products)
+				{
+					trace(product.@productId);
+					trace(product.price[0]);
+					product.@productId = 999;
+					
+					var prices:XMLList = product.price;
+					var price:XML = prices[0];
+					trace(price);
+					trace(price.toString());
+					trace(price.toXMLString());
+				}
+			}
+			
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				catalog.product[0].@productId = 1234;
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<s:Button label="Change First Product ID" click="button1_clickHandler(event)"/>
+	
+	<mx:DataGrid dataProvider="{catalog.product}" width="100%" height="100%">
+		<mx:columns>
+			<mx:DataGridColumn dataField="@productId" headerText="Product Id"/>
+			<mx:DataGridColumn dataField="name" headerText="Name"/>
+			<mx:DataGridColumn dataField="price" headerText="Price" textAlign="right"/>
+			<mx:DataGridColumn dataField="qtyInStock" headerText="Qty" textAlign="right"/>
+		</mx:columns>
+	</mx:DataGrid> 
+</s:Application>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:twittersearch="services.twittersearch.*">
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			protected function button_clickHandler(event:MouseEvent):void
+			{
+				searchResult.token = twitterSearch.search(qTextInput.text);
+			}
+			
+			
+			protected function dataGrid_creationCompleteHandler(event:FlexEvent):void
+			{
+				//searchResult2.token = twitterSearch.search(/*Enter value(s) for */ q);
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<twittersearch:TwitterSearch id="twitterSearch" fault="Alert.show(event.fault.faultString + '\n' + event.fault.faultDetail)" showBusyCursor="true"/>
+		<s:CallResponder id="searchResult"/>
+		<s:CallResponder id="searchResult2"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<mx:Form defaultButton="{button}">
+		<mx:FormItem label="Q">
+			<s:TextInput id="qTextInput"/>
+		</mx:FormItem>
+		<s:Button label="Search" id="button" click="button_clickHandler(event)"/>
+	</mx:Form>
+	<mx:DataGrid x="10" y="106" id="dataGrid" creationComplete="dataGrid_creationCompleteHandler(event)" dataProvider="{searchResult2.lastResult}">
+		<mx:columns>
+			<mx:DataGridColumn headerText="since_id" dataField="since_id"/>
+			<mx:DataGridColumn headerText="max_id" dataField="max_id"/>
+			<mx:DataGridColumn headerText="results" dataField="results"/>
+			<mx:DataGridColumn headerText="page" dataField="page"/>
+			<mx:DataGridColumn headerText="query" dataField="query"/>
+			<mx:DataGridColumn headerText="refresh_url" dataField="refresh_url"/>
+			<mx:DataGridColumn headerText="max_id_str" dataField="max_id_str"/>
+			<mx:DataGridColumn headerText="results_per_page" dataField="results_per_page"/>
+			<mx:DataGridColumn headerText="next_page" dataField="next_page"/>
+			<mx:DataGridColumn headerText="since_id_str" dataField="since_id_str"/>
+			<mx:DataGridColumn headerText="completed_in" dataField="completed_in"/>
+		</mx:columns>
+	</mx:DataGrid>
+</s:Application>

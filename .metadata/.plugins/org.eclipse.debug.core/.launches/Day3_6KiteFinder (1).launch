@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.adobe.flexbuilder.debug.launchConfigurationType.flash">
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_APPLICATION" value="src/Day3_6KiteFinder.mxml"/>
-<stringAttribute key="com.adobe.flexbuilder.debug.ATTR_PROJECT" value="Day3_6KiteFinder"/>
+<stringAttribute key="com.adobe.flexbuilder.debug.ATTR_PROJECT" value="Day4_3KiteFinder"/>
 <stringAttribute key="com.adobe.flexbuilder.debug.ATTR_RUN_URL" value="file:/C:/Development/FlexClass/Day3_6KiteFinder/bin-debug/Day3_6KiteFinder.html"/>
 <booleanAttribute key="com.adobe.flexbuilder.debug.ATTR_USE_DEFAULT_URLS" value="true"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/Day3_6KiteFinder"/>
-<listEntry value="/Day3_6KiteFinder/src/Day3_6KiteFinder.mxml"/>
+<listEntry value="/Day4_3KiteFinder"/>
+<listEntry value="/Day4_3KiteFinder/src/Day3_6KiteFinder.mxml"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>

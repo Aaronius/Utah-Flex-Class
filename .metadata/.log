@@ -6595,3 +6595,100 @@ org.eclipse.swt.SWTException: Device is disposed
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+!SESSION 2010-11-01 20:25:43.452 -----------------------------------------------
+eclipse.buildId=M20090211-1700
+java.version=1.6.0_16
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -clean -data C:\Development\FlexClass -clean
+
+!ENTRY com.adobe.flexbuilder.project 4 43 2010-11-01 20:29:47.088
+!MESSAGE Error deleting or modifying launch configuration "Day3_4ShuffledRowSolver" while deleting or renaming a project. You may want to edit it manually.
+!STACK 1
+org.eclipse.debug.core.DebugException: Launch configuration Day3_4ShuffledRowSolver at C:\Development\FlexClass\.metadata\.plugins\org.eclipse.debug.core\.launches\Day3_4ShuffledRowSolver.launch does not exist.
+	at org.eclipse.debug.internal.core.LaunchManager.createDebugException(LaunchManager.java:905)
+	at org.eclipse.debug.internal.core.LaunchManager.getInfo(LaunchManager.java:1362)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getInfo(LaunchConfiguration.java:393)
+	at org.eclipse.debug.internal.core.LaunchConfigurationWorkingCopy.copyFrom(LaunchConfigurationWorkingCopy.java:445)
+	at org.eclipse.debug.internal.core.LaunchConfigurationWorkingCopy.<init>(LaunchConfigurationWorkingCopy.java:109)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getWorkingCopy(LaunchConfiguration.java:536)
+	at com.adobe.flexide.launching.LaunchCleanupJob.run(LaunchCleanupJob.java:74)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SUBENTRY 1 org.eclipse.debug.core 4 5012 2010-11-01 20:29:47.088
+!MESSAGE Launch configuration Day3_4ShuffledRowSolver at C:\Development\FlexClass\.metadata\.plugins\org.eclipse.debug.core\.launches\Day3_4ShuffledRowSolver.launch does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-01 20:31:25.959
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-01 20:31:25.961
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-01 20:31:25.963
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-01 20:31:25.965
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-01 20:31:25.966
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-fxg" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.core.filebuffers 4 0 2010-11-01 20:31:25.968
+!MESSAGE The content type with id "com.adobe.flexbuilder.project.content-type-mxml" specified in the extension point does not exist.
+
+!ENTRY org.eclipse.jface 2 0 2010-11-01 20:31:28.462
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-01 20:31:28.462
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@5f11a2)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.declarations.in.workspace,Find All Declarations In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllDeclarationsAction@5f11a2)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.declarations.in.workspace,Declaration in Workspace,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2010-11-01 20:31:28.462
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@17ed108)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexide.editorcore.flexEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(com.adobe.flexbuilder.as.editor.find.all.references.in.workspace,Find All References In Workspace,
+		,
+		Category(com.adobe.flexbuilder.editorcore.navigation.category,Navigation,null,true),
+		LegacyHandlerWrapper(ActionHandler(action=com.adobe.flexbuilder.as.editor.ui.actions.FindAllReferencesAction@17ed108)),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	com.adobe.flexbuilder.as.editor.context.packageexplorer,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.search.references.in.workspace,References in Workspace,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.search.ui.category.search,Search,Search command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.debug.core 4 5012 2010-11-01 20:49:13.194
+!MESSAGE Failed to delete launch configuration.
